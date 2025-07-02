@@ -32,8 +32,8 @@ This project is built using Angular, SCSS, Typescript and hosted on Netlify.
 Clone the repository and run the command:
 
 ```sh
-git clone <project>
-cd <project>
+git clone https://github.com/victorbruce/rest-countries
+cd rest-countries
 ```
 
 ## 💻 Running the Application
@@ -94,7 +94,34 @@ ng e2e
 
 ## 📋 Approach
 
-- Defined by project starting structue by creating folders for `services`, `components`, `models`, `pages`, `assets`, `utilities`, `environments`, etc.
+**Project Structure**:
+
+- Defined by project starting structue by creating folders for `services`, `components`, `models`, `pages`, `assets`, `utilities`, `environments`, `routes` etc.
+
+**Ngrx store implementation**
+
+- Next, I installed all the necessary **@ngrx** packages such as `@ngrx/store`, `@ngrx/effects`, `@ngrx/store-devtools` and setup ngrx store in the `app.config.ts` file providing a store in `provides: []`
+- Created a country state to save in my ngrx store by defining a `state`, `actions`, `reducers`, and `effects`
+
+**Component Structure**
+
+- Next, I created services for:
+
+1. Abstracting HTTP into an `ApiClientService`
+2. Creating an error handler service `ErrorHandlerService`
+3. Defining a data service for country to call api endpoints via the `ApiClientService`
+
+**Implement Search Functionality:**
+
+- I added a `searchTerm` property to my `initialContryState` object, created an action and define a reducer and a **computed selector** for my state using `createSelector`
+- In my countries component, I then **dispatched** a `setSearchTerm` action when a user types.
+- I added some optimisation techniques for searching such as:
+
+  - a **debounce optimization technique** using RxJs `debounce` operator that waits **300ms** after the user stops typing before \*\*emitting a value.
+
+    > **Importance:** _This prevents firing our `setSearchTerm` action on every **keystroke**, reducing the load on the state and selector logic. If the user keeps typing, the timer resets and no dispatch happens until they pause._
+
+  - use `distinctUntilChanged()` function from RxJs to skip dispatch for same value typed twice. This avoids redunant actions if the user types the same thing twice.
 
 ## 🚀 Deployment
 
