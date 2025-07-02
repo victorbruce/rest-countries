@@ -12,6 +12,7 @@ import {
   countryFeature,
   selectFilteredCountries,
 } from '../../store/reducers/country.reducers';
+import { Router } from '@angular/router';
 import * as CountryActions from '../../store/actions/country.actions';
 import { CommonModule } from '@angular/common';
 import { debounceTime, distinctUntilChanged, Subject, takeUntil } from 'rxjs';
@@ -23,6 +24,7 @@ import { Region } from '../../models/country';
   styleUrl: './countries.component.scss',
 })
 export class CountriesComponent implements OnInit, OnDestroy {
+  private router = inject(Router);
   private readonly store = inject(Store);
   private destroy$ = new Subject<void>();
   searchControl = new FormControl('');
@@ -66,6 +68,10 @@ export class CountriesComponent implements OnInit, OnDestroy {
     this.store.dispatch(
       CountryActions.setRegionFilter({ region: region || null })
     );
+  }
+
+  goToDetail(code: string) {
+    this.router.navigate(['/countries', code]);
   }
 
   ngOnDestroy(): void {

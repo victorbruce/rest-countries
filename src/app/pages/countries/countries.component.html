@@ -17,7 +17,7 @@
 } @else {
 <ul>
   @for (c of countries(); track c.name.common) {
-  <li>{{ c.name.common }} ({{ c.region }}) - {{ c.population | number }}</li>
+  <li (click)="goToDetail(c.cca3)">{{ c.name.common }} ({{ c.region }}) - {{ c.population | number }}</li>
   }
 </ul>
 } } }
