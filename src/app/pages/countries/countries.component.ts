@@ -32,6 +32,9 @@ export class CountriesComponent implements OnInit, OnDestroy {
   loading = this.store.selectSignal(countryFeature.selectLoading);
   error = this.store.selectSignal(countryFeature.selectError);
   regions: Region[] = Object.values(Region);
+  noCountriesFound = computed(
+    () => !this.loading() && this.countries().length === 0
+  );
 
   constructor() {
     this.store.dispatch(CountryActions.loadCountries());
@@ -46,9 +49,13 @@ export class CountriesComponent implements OnInit, OnDestroy {
         );
       });
 
-    this.regionControl.valueChanges.pipe(distinctUntilChanged()).subscribe((region) => {
-      this.store.dispatch(CountryActions.setRegionFilter({region: region || null}))
-    })
+    this.regionControl.valueChanges
+      .pipe(distinctUntilChanged())
+      .subscribe((region) => {
+        this.store.dispatch(
+          CountryActions.setRegionFilter({ region: region || null })
+        );
+      });
   }
 
   onSearch(term: string) {
