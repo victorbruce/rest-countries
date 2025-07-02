@@ -123,6 +123,12 @@ ng e2e
 
   - use `distinctUntilChanged()` function from RxJs to skip dispatch for same value typed twice. This avoids redunant actions if the user types the same thing twice.
 
+**Implement Filter Functionality:**
+
+- I extend country initial state to add `regionFilter`.
+- I then updated the coutnry actions with `setRegionFilter` and a reducer logic to update state when user dispatch the `setRegionFilter` action when a region is selected.
+- After, I added an optimization technique by preventing dispatch to get emitted when the same region is selected twice or more using RxJs `distinctUntilChanged` function to reduce the load on the state and selector logic.
+
 ## 🚀 Deployment
 
 Netlify
