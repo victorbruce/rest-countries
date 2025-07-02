@@ -6,6 +6,7 @@ export interface CountryState {
   error: string | null;
   searchTerm: string;
   regionFilter: string | null;
+  selectedCountry: Country | null;
 }
 
 export const initialCountryState: CountryState = {
@@ -14,4 +15,5 @@ export const initialCountryState: CountryState = {
   error: null,
   searchTerm: '',
   regionFilter: null,
+  selectedCountry: null,
 };

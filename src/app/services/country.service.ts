@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { ApiClientService } from './api-client.service';
 import { Country } from '../models/country';
 import { environment } from '../../environments/environment.prod';
@@ -14,9 +14,15 @@ export class CountryService {
   constructor() {}
 
   getCountries(): Observable<Country[]> {
-    return this.apiClient.get<Country[]>(this.API_URL, {
+    return this.apiClient.get<Country[]>(`${this.API_URL}/all`, {
       retryCount: 0,
-      params: { fields: 'name,population,region,capital,flag' },
+      params: { fields: 'name,population,region,capital,flags,cca3' },
     });
+  }
+
+  getCountryByCode(code: string) {
+    return this.apiClient
+      .get<Country[]>(`${this.API_URL}/alpha/${code}`)
+      .pipe(map((countries: Country[]) => countries[0]));
   }
 }

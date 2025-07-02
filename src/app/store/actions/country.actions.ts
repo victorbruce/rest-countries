@@ -23,4 +23,22 @@ export const setRegionFilter = createAction(
   props<{ region: string | null }>()
 );
 
-export const loadACountry = createAction('[Country] Load A Country');
+export const selectCountry = createAction(
+  '[Country] Select Country',
+  props<{ country: Country }>()
+);
+
+export const loadCountryByCode = createAction(
+  '[Country] Load Country By Code',
+  props<{ code: string }>()
+);
+
+export const loadCountryByCodeSuccess = createAction(
+  '[Country] Load Country By Code Success',
+  props<{ country: Country }>()
+);
+
+export const loadCountryByCodeFailure = createAction(
+  '[Country] Load Country By Code Failure',
+  props<{ error: string }>()
+);
