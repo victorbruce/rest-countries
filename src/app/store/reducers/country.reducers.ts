@@ -28,10 +28,30 @@ export const countryFeature = createFeature({
     on(CountryActions.setRegionFilter, (state, { region }) => ({
       ...state,
       regionFilter: region,
+    })),
+    on(CountryActions.selectCountry, (state, { country }) => ({
+      ...state,
+      selectedCountry: country,
+    })),
+    on(CountryActions.loadCountryByCodeSuccess, (state, { country }) => ({
+      ...state,
+      selectedCountry: country,
+      loading: false,
+    })),
+    on(CountryActions.loadCountryByCodeFailure, (state, { error }) => ({
+      ...state,
+      error,
+      loading: false,
+    })),
+    on(CountryActions.loadCountryByCode, (state) => ({
+      ...state,
+      loading: true,
+      error: null,
     }))
   ),
 });
 
+// auto-generated selectors
 export const {
   name: countryFeatureKey,
   reducer: countryReducer,
@@ -42,6 +62,7 @@ export const {
   selectRegionFilter,
 } = countryFeature;
 
+// custom selectors
 export const selectFilteredCountries = createSelector(
   selectCountries,
   selectSearchTerm,
@@ -57,4 +78,9 @@ export const selectFilteredCountries = createSelector(
       return matchesSearch && matchesRegion;
     });
   }
+);
+
+export const selectSelectedCountry = createSelector(
+  countryFeature.selectSelectedCountry,
+  (selectedCountry) => selectedCountry
 );
