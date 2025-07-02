@@ -18,4 +18,9 @@ export const setSearchTerm = createAction(
   props<{ searchTerm: string }>()
 );
 
+export const setRegionFilter = createAction(
+  '[Country] Set Region Filter',
+  props<{ region: string | null }>()
+);
+
 export const loadACountry = createAction('[Country] Load A Country');

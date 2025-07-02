@@ -24,6 +24,10 @@ export const countryFeature = createFeature({
     on(CountryActions.setSearchTerm, (state, { searchTerm }) => ({
       ...state,
       searchTerm,
+    })),
+    on(CountryActions.setRegionFilter, (state, { region }) => ({
+      ...state,
+      regionFilter: region,
     }))
   ),
 });
@@ -35,18 +39,22 @@ export const {
   selectLoading,
   selectError,
   selectSearchTerm,
+  selectRegionFilter,
 } = countryFeature;
 
 export const selectFilteredCountries = createSelector(
   selectCountries,
   selectSearchTerm,
-  (countries, searchTerm) => {
+  selectRegionFilter,
+  (countries, searchTerm, region) => {
     return countries.filter((c) => {
       const matchesSearch = c.name.common
         .toLowerCase()
         .includes(searchTerm.toLowerCase());
 
-      return matchesSearch;
+      const matchesRegion = region ? c.region === region : true;
+
+      return matchesSearch && matchesRegion;
     });
   }
 );

@@ -5,11 +5,13 @@ export interface CountryState {
   loading: boolean;
   error: string | null;
   searchTerm: string;
+  regionFilter: string | null;
 }
 
 export const initialCountryState: CountryState = {
   countries: [],
   loading: false,
   error: null,
-  searchTerm: ''
+  searchTerm: '',
+  regionFilter: null,
 };
