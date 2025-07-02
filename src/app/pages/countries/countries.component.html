@@ -12,9 +12,12 @@
   <option value="">All regions</option>
   <option *ngFor="let r of regions" [value]="r">{{ r }}</option>
 </select>
+@if(noCountriesFound()) {
+<div>No countries found based on your matching criteria</div>
+} @else {
 <ul>
   @for (c of countries(); track c.name.common) {
   <li>{{ c.name.common }} ({{ c.region }}) - {{ c.population | number }}</li>
   }
 </ul>
-} }
+} } }
