@@ -16,7 +16,7 @@ export class CountryService {
   getCountries(): Observable<Country[]> {
     return this.apiClient.get<Country[]>(`${this.API_URL}/all`, {
       retryCount: 0,
-      params: { fields: 'name,population,region,capital,flags,cca3' },
+      params: { fields: 'name,population,region,capital,flags,cca3,borders' },
     });
   }
 
