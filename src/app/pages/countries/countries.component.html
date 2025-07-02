@@ -3,6 +3,11 @@
 } @else { @if (error()) {
 <div>{{ error() }}</div>
 } @else {
+<input
+  type="text"
+  placeholder="Search country..."
+  [formControl]="searchControl"
+/>
 <ul>
   @for (c of countries(); track c.name.common) {
   <li>{{ c.name.common }} ({{ c.region }}) - {{ c.population | number }}</li>

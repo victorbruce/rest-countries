@@ -13,4 +13,9 @@ export const loadCountriesFailure = createAction(
   props<{ error: string }>()
 );
 
+export const setSearchTerm = createAction(
+  '[Country] Set Search Term',
+  props<{ searchTerm: string }>()
+);
+
 export const loadACountry = createAction('[Country] Load A Country');

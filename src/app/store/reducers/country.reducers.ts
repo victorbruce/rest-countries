@@ -1,4 +1,4 @@
-import { createReducer, createFeature, on } from '@ngrx/store';
+import { createReducer, createFeature, on, createSelector } from '@ngrx/store';
 import * as CountryActions from '../actions/country.actions';
 import { initialCountryState } from '../state/country.state';
 
@@ -20,6 +20,10 @@ export const countryFeature = createFeature({
       ...state,
       error,
       loading: false,
+    })),
+    on(CountryActions.setSearchTerm, (state, { searchTerm }) => ({
+      ...state,
+      searchTerm,
     }))
   ),
 });
@@ -30,4 +34,19 @@ export const {
   selectCountries,
   selectLoading,
   selectError,
+  selectSearchTerm,
 } = countryFeature;
+
+export const selectFilteredCountries = createSelector(
+  selectCountries,
+  selectSearchTerm,
+  (countries, searchTerm) => {
+    return countries.filter((c) => {
+      const matchesSearch = c.name.common
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase());
+
+      return matchesSearch;
+    });
+  }
+);
