@@ -15,6 +15,7 @@ import {
 import * as CountryActions from '../../store/actions/country.actions';
 import { CommonModule } from '@angular/common';
 import { debounceTime, distinctUntilChanged, Subject, takeUntil } from 'rxjs';
+import { Region } from '../../models/country';
 @Component({
   selector: 'app-countries',
   imports: [CommonModule, ReactiveFormsModule],
@@ -25,11 +26,12 @@ export class CountriesComponent implements OnInit, OnDestroy {
   private readonly store = inject(Store);
   private destroy$ = new Subject<void>();
   searchControl = new FormControl('');
+  regionControl = new FormControl('');
 
   countries = this.store.selectSignal(selectFilteredCountries);
   loading = this.store.selectSignal(countryFeature.selectLoading);
   error = this.store.selectSignal(countryFeature.selectError);
-  // filteredCountries = this.store.selectSignal(countryFeature.selectSearchTerm);
+  regions: Region[] = Object.values(Region);
 
   constructor() {
     this.store.dispatch(CountryActions.loadCountries());
@@ -43,10 +45,20 @@ export class CountriesComponent implements OnInit, OnDestroy {
           CountryActions.setSearchTerm({ searchTerm: searchTerm || '' })
         );
       });
+
+    this.regionControl.valueChanges.pipe(distinctUntilChanged()).subscribe((region) => {
+      this.store.dispatch(CountryActions.setRegionFilter({region: region || null}))
+    })
   }
 
   onSearch(term: string) {
     this.store.dispatch(CountryActions.setSearchTerm({ searchTerm: term }));
+  }
+
+  onFilter(region: string) {
+    this.store.dispatch(
+      CountryActions.setRegionFilter({ region: region || null })
+    );
   }
 
   ngOnDestroy(): void {
