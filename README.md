@@ -129,6 +129,13 @@ ng e2e
 - I then updated the coutnry actions with `setRegionFilter` and a reducer logic to update state when user dispatch the `setRegionFilter` action when a region is selected.
 - After, I added an optimization technique by preventing dispatch to get emitted when the same region is selected twice or more using RxJs `distinctUntilChanged` function to reduce the load on the state and selector logic.
 
+**Component Details**
+
+- Implement selecting a single country from Ngrx store
+- Modify API_URL to add extra params like cca3 to get country codes, borders etc
+- Add method for fetching a single country from the api url by code
+- Render country details in the details page
+
 ## 🚀 Deployment
 
 Netlify
