@@ -68,7 +68,7 @@
   --font-family-primary: "Inter";
 }
 
-[data-theme="dark"] {
+[dark-theme="dark"] {
   --color-background: var(--color-neutral-950);
   --color-surface: var(--color-neutral-900);
   --color-surface-elevated: var(--color-neutral-800);
@@ -99,42 +99,6 @@
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.3);
   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5),
     0 4px 6px -4px rgb(0 0 0 / 0.4);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme]) {
-    --color-background: var(--color-neutral-950);
-    --color-surface: var(--color-neutral-900);
-    --color-surface-elevated: var(--color-neutral-800);
-    --color-border: var(--color-neutral-700);
-    --color-border-subtle: var(--color-neutral-800);
-
-    --color-text-primary: var(--color-neutral-0);
-    --color-text-secondary: var(--color-neutral-300);
-    --color-text-tertiary: var(--color-neutral-400);
-    --color-text-inverse: var(--color-neutral-900);
-
-    --color-primary: var(--color-blue-500);
-    --color-primary-hover: var(--color-blue-700);
-    --color-primary-light: var(--color-neutral-800);
-
-    --color-success: var(--color-green-500);
-    --color-success-light: var(--color-neutral-800);
-
-    --color-danger: var(--color-red-500);
-    --color-danger-light: var(--color-neutral-800);
-
-    // Interactive states for dark mode
-    --color-hover: var(--color-neutral-800);
-    --color-active: var(--color-neutral-700);
-
-    // Dark mode shadows
-    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
-    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4),
-      0 2px 4px -2px rgb(0 0 0 / 0.3);
-    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5),
-      0 4px 6px -4px rgb(0 0 0 / 0.4);
-  }
 }
 
 body {

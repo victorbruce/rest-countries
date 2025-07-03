@@ -14,14 +14,19 @@ import {
   countryReducer,
 } from './store/reducers/country.reducers';
 import { CountryEffects } from './store/effects/country.effects';
+import { themeReducer } from './store/reducers/theme.reducers';
+import { ThemeEffects } from './store/effects/theme.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideHttpClient(),
-    provideStore({ [countryFeatureKey]: countryReducer }),
-    provideEffects([CountryEffects]),
+    provideStore({
+      [countryFeatureKey]: countryReducer,
+      theme: themeReducer,
+    }),
+    provideEffects([CountryEffects, ThemeEffects]),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
   ],
 };
