@@ -1,0 +1,59 @@
+@use "../../../styles/variables" as *;
+@use "../../../styles/mixins" as *;
+
+.nav {
+  box-shadow: var(--shadow-md);
+
+  & .logo {
+    @include TextPreset4;
+    text-decoration: none;
+    color: var(--color-text-primary);
+
+    @include respond-above($breakpoint-md) {
+      @include TextPreset1;
+    }
+  }
+  & .nav-container {
+    @include flex(row, space-between, center, 0);
+    padding: 2rem 1rem;
+    @include TextPreset4;
+    font-weight: 800;
+  }
+
+  & .toggle {
+    @include TextPreset5;
+    line-height: 0;
+    border-radius: 8px;
+    outline: none;
+    border: 0;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+
+    @include respond-above($breakpoint-md) {
+      @include TextPreset3;
+      font-weight: 500;
+    }
+
+    & span > svg {
+      width: 16px;
+      height: 16px;
+
+      @include respond-above($breakpoint-md) {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    & span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
+
+    &:hover {
+      background-color: var(--color-hover);
+    }
+  }
+}
