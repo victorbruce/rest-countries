@@ -1,3 +1,9 @@
+@use "./styles/variables" as *;
+@use "./styles/fonts" as *;
+@use "./styles/mixins" as *;
+@use "./styles/components/button";
+// @use "./styles/components/input" as *;
+
 *,
 ::after,
 ::before {
@@ -65,7 +71,7 @@
     0 4px 6px -4px rgb(0 0 0 / 0.1);
 
   // Fonts
-  --font-family-primary: "Inter";
+  --font-family-primary: "Nunito Sans", sans-serif;
 }
 
 [dark-theme="dark"] {
@@ -107,5 +113,5 @@ body {
   color: var(--color-text-primary);
   font-family: var(--font-family-primary);
   font-size: 16px;
-  // @include theme-transition();
+  @include theme-transition();
 }
