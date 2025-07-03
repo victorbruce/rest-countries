@@ -3,9 +3,10 @@ import { Store } from '@ngrx/store';
 import { toggleTheme } from '../../store/actions/theme.actions';
 import { selectThemeMode } from '../../store/reducers/theme.reducers';
 import { CommonModule, AsyncPipe } from '@angular/common';
+import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-navbar',
-  imports: [CommonModule, AsyncPipe],
+  imports: [RouterModule, CommonModule, AsyncPipe],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
 })
