@@ -84,3 +84,16 @@ export const selectSelectedCountry = createSelector(
   countryFeature.selectSelectedCountry,
   (selectedCountry) => selectedCountry
 );
+
+export const selectBorderCountries = createSelector(
+  selectCountries,
+  selectSelectedCountry,
+  (allCountries, selected) => {
+    if (!selected || !selected.borders?.length) {
+      return [];
+    }
+    return selected.borders
+      .map(code => allCountries.find(c => c.cca3 === code))
+      .filter(Boolean);
+  }
+);
