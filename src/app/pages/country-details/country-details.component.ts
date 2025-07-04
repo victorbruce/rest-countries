@@ -37,16 +37,6 @@ export class CountryDetailsComponent {
     });
   }
 
-  // ngOnInit(): void {
-  //   const code = this.route.snapshot.paramMap.get('code');
-  //   if (!code) return;
-
-  //   const existingCountry = this.country();
-  //   if (!existingCountry || existingCountry.cca3 !== code) {
-  //     this.store.dispatch(CountryActions.loadCountryByCode({ code }));
-  //   }
-  // }
-
   goBack() {
     this.router.navigate(['/']);
   }
