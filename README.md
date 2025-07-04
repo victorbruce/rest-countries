@@ -136,6 +136,11 @@ ng e2e
 - Add method for fetching a single country from the api url by code
 - Render country details in the details page
 
+**Implement theme**
+- Add theme toggle functionality by storing theme state in ngrx store
+
+**Design UI and make it responsive**
+
 ## 🚀 Deployment
 
 Netlify
