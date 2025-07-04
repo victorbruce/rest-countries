@@ -1,0 +1,119 @@
+@use "../../../styles/variables" as *;
+@use "../../../styles/mixins" as *;
+
+.back-btn {
+  @include flex(row, center, center, 10px);
+  background-color: transparent;
+  color: var(--color-text-primary);
+  @include TextPreset3;
+  line-height: 0;
+  font-weight: 400;
+  padding: 10px 1rem;
+  min-width: 136px;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+  @include theme-transition;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--color-background);
+  }
+}
+
+.country-details {
+  &-content {
+    padding-top: 48px;
+    padding-bottom: 48px;
+
+    @include respond-above($breakpoint-sm) {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+		@include respond-above($breakpoint-md) {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			gap: 32px;
+		}
+
+    & img {
+      margin-bottom: 44px;
+
+			@include respond-above($breakpoint-md) {
+				width: 560px;
+				height: 400px;
+				margin-bottom: 0;
+			}
+    }
+
+    .mobile-title {
+      @include TextPreset2;
+      margin-bottom: 1rem;
+
+      @include respond-above($breakpoint-md) {
+        display: none;
+      }
+    }
+  }
+}
+
+.desktop-title {
+  display: none;
+
+  @include respond-above($breakpoint-md) {
+    display: block;
+    @include TextPreset2;
+		margin-bottom: 1.5rem;
+  }
+}
+
+.detail-list-wrapper {
+  @include flex(column, flex-start, flex-start, 2rem);
+
+	@include respond-above($breakpoint-md) {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr)
+	}
+}
+
+.detail-list {
+  @include flex(column, flex-start, flex-start, 1rem);
+  padding: 12px 0;
+
+  & .key {
+    color: var(--color-text-primary);
+    font-weight: 600;
+  }
+
+  & .value {
+    color: var(--color-text-secondary);
+    font-weight: 400;
+  }
+}
+
+.country-borders {
+  margin-top: 2rem;
+  & p {
+    @include TextPreset3;
+    color: var(--color-text-primary);
+    margin-bottom: 1rem;
+  }
+  & .borders {
+    @include flex(row, flex-start, flex-start, 10px);
+    flex-wrap: wrap;
+
+    & button {
+      background-color: var(--color-background);
+      padding: 6px;
+      border-radius: 4px;
+      min-width: 96px;
+      text-align: center;
+      @include TextPreset6;
+			border: none;
+			outline: none;
+    }
+  }
+}

@@ -1,25 +1,107 @@
 @if (loading()) {
-<div>Loading country details...</div>
+<div class="loader">
+  <app-loader class="loading-spinner" message="loading..."></app-loader>
+</div>
 } @else if (error()) {
-<div class="text-red-600">{{ error() }}</div>
+<div class="error-message">
+  <p>{{ error() }}</p>
+</div>
 } @else if (country()) {
-<div class="p-4 border rounded shadow">
-  <button (click)="goBack()">Go back</button>
-  <h2 class="text-2xl font-bold mb-2">{{ country()?.name?.common }}</h2>
+<div class="country-details">
+  <button class="back-btn" (click)="goBack()">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="lucide lucide-move-left-icon lucide-move-left"
+    >
+      <path d="M6 8L2 12L6 16" />
+      <path d="M2 12H22" />
+    </svg>
+    Back
+  </button>
+  <div class="country-details-content">
+    <div>
+      <img
+        [src]="country()?.flags?.png"
+        [alt]="country()?.name?.common + ' flag'"
+        class=""
+      />
 
-  <img
-    [src]="country()?.flags?.png"
-    [alt]="country()?.name?.common + ' flag'"
-    class=""
-  />
+      <h2 class="mobile-title">{{ country()?.name?.common }}</h2>
+    </div>
+    <div>
+      <h2 class="desktop-title">{{ country()?.name?.common }}</h2>
+      <div class="detail-list-wrapper">
+        <ul class="detail-list">
+          <li>
+            <span class="key">Native Name: </span>
+            <span class="value">{{
+              getFirstNativeName(country()?.name?.nativeName)
+            }}</span>
+          </li>
+          <li>
+            <span class="key">Population: </span>
+            <span class="value">{{ country()!.population | number }}</span>
+          </li>
+          <li>
+            <span class="key">Region: </span>
+            <span class="value">{{ country()?.region }}</span>
+          </li>
+          <li>
+            <span class="key">Sub Region: </span>
+            <span class="value">{{ country()?.subregion || "NA" }}</span>
+          </li>
+          <li>
+            <span class="key">Capital: </span>
+            <span class="value"> {{ country()?.capital?.join(", ") }}</span>
+          </li>
+        </ul>
 
-  <p><strong>Region:</strong> {{ country()?.region }}</p>
-  <p><strong>Population:</strong> {{ country()!.population | number }}</p>
-  <p>
-    <strong>Capital:</strong>
-    {{ country()?.capital?.join(", ") }}
-  </p>
+        <ul class="detail-list">
+          <li>
+            <span class="key">Top Level Domain: </span>
+            <span class="value"> {{ country()?.tld?.join(", ") }}</span>
+          </li>
+          <li>
+            <span class="key">Currencies: </span>
+            <span class="value">
+              {{ getCurrencies(country()?.currencies) }}</span
+            >
+          </li>
+          <li>
+            <span class="key">Languages: </span>
+            <span class="value"> {{ getLanguages(country()?.languages) }}</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="country-borders">
+        <p>Border Countries:</p>
+        @if (borderCountries().length) {
+        <div class="borders">
+          @for (country of borderCountries(); track $index) {
+
+          <button (click)="goToDetail(country!.cca3)" class="border-pill">
+            {{ country?.name?.common }}
+          </button>
+          }
+        </div>
+        } @else {
+        <span>None</span>
+        }
+      </div>
+    </div>
+  </div>
 </div>
 } @else {
-<div>No country details available.</div>
+<div class="empty-state">
+  <p>No country found based on your matching criteria</p>
+</div>
 }
