@@ -2,11 +2,25 @@ export interface Country {
   name: CountryName;
   capital: string[];
   region: Region;
+  subregion?: string;
   flags: {
-    png: string
+    png: string;
+    svg?: string;
+    alt?: string;
   };
   population: number;
   cca3: string;
+  tld?: string[];
+  currencies?: {
+    [currencyCode: string]: {
+      symbol: string;
+      name: string;
+    };
+  };
+  languages?: {
+    [languageCode: string]: string;
+  };
+  borders?: string[];
 }
 
 export interface CountryName {
