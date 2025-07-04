@@ -3,6 +3,7 @@
 
 .nav {
   box-shadow: var(--shadow-md);
+  background-color: var(--color-background);
 
   & .logo {
     @include TextPreset4;
@@ -28,6 +29,8 @@
     border: 0;
     cursor: pointer;
     padding: 0.5rem 1rem;
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
 
     @include respond-above($breakpoint-md) {
       @include TextPreset3;
@@ -49,8 +52,6 @@
       align-items: center;
       justify-content: center;
     }
-    background-color: var(--color-background);
-    color: var(--color-text-primary);
 
     &:hover {
       background-color: var(--color-hover);

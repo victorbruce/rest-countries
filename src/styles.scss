@@ -109,9 +109,31 @@
 
 body {
   position: relative;
-  background-color: var(--color-background);
+  background-color: var(--color-surface);
   color: var(--color-text-primary);
   font-family: var(--font-family-primary);
   font-size: 16px;
   @include theme-transition();
+}
+
+.main {
+  padding: 1.5rem 1rem;
+  max-width: 1280px;
+  margin: auto;
+
+  @include respond-above($breakpoint-sm) {
+    padding: 3rem 1rem;
+  }
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.error-message {
+  color: var(--color-danger);
 }

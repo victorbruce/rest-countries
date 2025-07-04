@@ -17,9 +17,11 @@ import * as CountryActions from '../../store/actions/country.actions';
 import { CommonModule } from '@angular/common';
 import { debounceTime, distinctUntilChanged, Subject, takeUntil } from 'rxjs';
 import { Region } from '../../models/country';
+import { DropDownComponent } from '../../components/drop-down/drop-down.component';
+import { LoaderComponent } from '../../components/loader/loader.component';
 @Component({
   selector: 'app-countries',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, DropDownComponent, LoaderComponent],
   templateUrl: './countries.component.html',
   styleUrl: './countries.component.scss',
 })
@@ -72,6 +74,13 @@ export class CountriesComponent implements OnInit, OnDestroy {
 
   goToDetail(code: string) {
     this.router.navigate(['/countries', code]);
+  }
+
+  onRegionSelected(region: string | null) {
+    this.regionControl.setValue(region);
+    this.store.dispatch(
+      CountryActions.setRegionFilter({ region: region || null })
+    );
   }
 
   ngOnDestroy(): void {
