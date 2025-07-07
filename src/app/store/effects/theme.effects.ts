@@ -9,7 +9,6 @@ import { selectThemeMode } from '../reducers/theme.reducers';
 export class ThemeEffects {
   applyTheme$;
   constructor(private actions$: Actions, private store: Store) {
-
     this.applyTheme$ = createEffect(
       () =>
         this.actions$.pipe(
@@ -17,6 +16,8 @@ export class ThemeEffects {
           withLatestFrom(this.store.select(selectThemeMode)),
           tap(([_, mode]) => {
             const html = document.documentElement;
+
+            localStorage.setItem('theme', mode);
             if (mode === 'dark') {
               html.setAttribute('dark-theme', 'dark');
             } else {
@@ -27,5 +28,4 @@ export class ThemeEffects {
       { dispatch: false }
     );
   }
-
 }
